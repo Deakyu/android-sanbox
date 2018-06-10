@@ -34,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
@@ -45,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Tab1Fragment(), "TAB1");
-        adapter.addFragment(new Tab2Fragment(), "TAB2");
-        adapter.addFragment(new Tab3Fragment(), "TAB3");
-        viewPager.setAdapter(adapter);
+        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+
+        mSectionsPageAdapter.addFragment(new Tab1Fragment(), "TAB1");
+        mSectionsPageAdapter.addFragment(new Tab2Fragment(), "TAB2");
+        mSectionsPageAdapter.addFragment(new Tab3Fragment(), "TAB3");
+        viewPager.setAdapter(mSectionsPageAdapter);
     }
 }
