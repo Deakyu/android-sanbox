@@ -24,11 +24,13 @@ public class MainActivity extends AppCompatActivity implements BooksView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        System.out.println("DEE onCreate");
+
         setRecyclerView();
         setPresenter();
         setUi();
     }
-    
+
     private void setRecyclerView() {
         adapter = new BookListAdapter(this);
         recyclerView = findViewById(R.id.recycler_view);
@@ -38,7 +40,10 @@ public class MainActivity extends AppCompatActivity implements BooksView {
 
     private void setPresenter() {
         interactor = new BooksInteractorImpl();
-        presenter = new BooksPresenter(interactor);
+        presenter = (BooksPresenter)getLastCustomNonConfigurationInstance();
+        if(presenter == null) {
+            presenter = new BooksPresenterImpl(interactor);
+        }
         presenter.bind(this);
     }
 
@@ -63,8 +68,54 @@ public class MainActivity extends AppCompatActivity implements BooksView {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        System.out.println("DEE onStart");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(adapter != null && presenter != null && presenter.getCurrentBookList() != null) {
+            adapter.setBooks(presenter.getCurrentBookList());
+        }
+        System.out.println("DEE onRestoreInstanceState");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("DEE onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("DEE onPause");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        System.out.println("DEE onSaveInstanceState");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("DEE onStop");
+    }
+
+    @Override
     protected void onDestroy() {
         presenter.unbind();
         super.onDestroy();
+
+        System.out.println("DEE onDestroy");
+    }
+
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        return presenter;
     }
 }
