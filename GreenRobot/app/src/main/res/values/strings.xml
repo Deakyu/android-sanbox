@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GreenRobot</string>
+    <string name="title_activity_child">ChildActivity</string>
+</resources>
