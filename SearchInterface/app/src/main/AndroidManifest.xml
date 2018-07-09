@@ -36,8 +36,13 @@
              in the SearchableActivity -->
         <activity android:name=".OtherActivity">
             <meta-data android:name="android.app.default_searchable"
-                        android:value=".SearchableActivity"/>
+                        android:value="com.example.deakyu.searchinterface.SearchableActivity"/>
         </activity>
+
+        <provider
+            android:authorities="com.example.deakyu.searchinterface.MySuggestionsProvider"
+            android:name="com.example.deakyu.searchinterface.MySuggestionsProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

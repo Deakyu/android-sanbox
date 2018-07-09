@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Searchable
+<searchable
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:label="@string/app_name"
-    android:hint="@string/search_hint"/>
+    android:hint="@string/search_hint"
+    android:searchSuggestAuthority="com.example.deakyu.searchinterface.MySuggestionsProvider"
+    android:searchSuggestSelection="@string/search_suggestion_selection"/>

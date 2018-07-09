@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Search Interface</string>
     <string name="search_hint">Search me</string>
+    <string name="search_suggestion_selection">\?</string>
+    <string name="search_button_string">Activate Search!</string>
+    <string name="go_to_otheractivity">Go to OtherActivity</string>
 </resources>
