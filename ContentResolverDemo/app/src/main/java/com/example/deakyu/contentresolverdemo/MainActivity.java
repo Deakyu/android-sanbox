@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -24,11 +25,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
 
-    private static final int READ_CONTACTS_PERMISSION = 1;
-    private static final int READ_CONTACTS_LOADER = 1;
+    public static final int READ_CONTACTS_PERMISSION = 1;
+    public static final int READ_CONTACTS_LOADER = 1;
 
     private TextView wordsTextView;
     private Button loadContactsButton;
+    private Button goToModifyActivityButton;
     private String[] mProjection = {ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
                                     ContactsContract.Contacts.CONTACT_STATUS,
                                     ContactsContract.Contacts.HAS_PHONE_NUMBER};
@@ -44,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         wordsTextView = findViewById(R.id.words_text_view);
         loadContactsButton = findViewById(R.id.load_data_button);
+        goToModifyActivityButton = findViewById(R.id.go_to_modify_activity_button);
         loadContactsButton.setOnClickListener(this);
+        goToModifyActivityButton.setOnClickListener(this);
         executeRuntimePermission();
     }
 
@@ -58,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getLoaderManager().initLoader(READ_CONTACTS_LOADER, null, this);
                 firstLoad = false;
             } else getLoaderManager().restartLoader(READ_CONTACTS_LOADER, null, this);
+        } else if(v.getId() == R.id.go_to_modify_activity_button) {
+            Intent intent = new Intent(MainActivity.this, ModifyActivity.class);
+            startActivity(intent);
         }
     }
 
