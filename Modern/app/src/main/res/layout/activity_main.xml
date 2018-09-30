@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
-            name="repository"
-            type="com.example.lee52.modern.Repository"/>
+            name="viewModel"
+            type="com.example.lee52.modern.MainViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:text="@{repository.repositoryName}"
+            android:text="@{viewModel.text}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -30,52 +32,25 @@
             app:layout_constraintVertical_bias="0.083"
             tools:text="Modern Android app" />
 
-        <TextView
-            android:id="@+id/repository_has_issues"
+        <ProgressBar
+            android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/has_issues"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/repository_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/repository_name"
-            app:layout_constraintTop_toTopOf="@+id/repository_name"
-            app:layout_constraintVertical_bias="1.0" />
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            android:id="@+id/repository_owner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repository_name"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="Mladen Rakonjac" />
-
-        <TextView
-            android:id="@+id/number_of_starts"
+        <Button
+            android:id="@+id/refresh_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:onClick="@{() -> viewModel.refresh()}"
+            android:clickable="@{viewModel.isLoading ? false : true}"
+            android:text="Refresh"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repository_owner"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="0 stars" />
-
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

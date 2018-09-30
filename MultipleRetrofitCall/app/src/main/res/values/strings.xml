@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MultipleRetrofitCall</string>
+    <string name="call_service_mutiple_times">Call Service Mutiple Times!!</string>
+</resources>
